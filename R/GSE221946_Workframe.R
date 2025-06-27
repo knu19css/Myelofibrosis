@@ -11,7 +11,7 @@ getwd()
 
 plan(sequential)
 options(future.globals.maxSize = 20e9)
-plan(multisession)
+plan(multisession, workers = 8)
 plan()
 
 #load
@@ -22,7 +22,8 @@ data <- CreateSeuratObject(count = data)
 
 
 data <- PercentageFeatureSet(data, pattern = "^MT-", col.name = "percent.mt")
-data <- SCTransform(data, vars.to.regress = "percent.mt", verbose = FALSE)
+VlnPlot(data, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), pt.size = 0)
+data <- subset(data, subset = nFeatu)
 
 data <- NormalizeData(data)
 data <- FindVariableFeatures(data, selection.method = "vst", nfeatures = 2000)
