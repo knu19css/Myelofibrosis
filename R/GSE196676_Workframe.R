@@ -1,4 +1,5 @@
 library(Seurat)
+library(clustree)
 library(usethis)
 library(future)
 library(Matrix)
@@ -50,16 +51,14 @@ VizDimLoadings(data, dims = 1:2, reduction = "pca")
 
 DimPlot(data, reduction = "pca") + NoLegend()
 DimHeatmap(data, dims = 1, cells = 500, balanced = TRUE)
-DimHeatmap(data, dims = 1:18, cells = 500, balanced = TRUE)
+DimHeatmap(data, dims = 1:20, cells = 500, balanced = TRUE)
 
 ElbowPlot(data)
 
-data <- FindNeighbors(data, dims = 1:18)
-data <- FindClusters(data, resolution = 0.7)
+data <- FindNeighbors(data, dims = 1:20)
+data <- FindClusters(data, resolution = 1.5)
 head(Idents(data), 5)
 
-data <- RunUMAP(data, dims = 1:18)
-DimPlot(data, reduction = "umap")
+data <- RunUMAP(data, dims = 1:20)
+DimPlot(data, reduction = "umap", label = T)
 VlnPlot(data, features = top10, stack = T)
-MKs <- unlist(strsplit("GP9,ARTNL,ITGA2B,PLEK,G6B,ITGB3", ","))
-
