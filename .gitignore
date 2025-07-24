@@ -10,7 +10,9 @@ GSE144568/
 GSE221946/
 GSE156640/
 GSE196676/
+GSE212092/
 ppt/
 *.csv
 *.rds
+*.gz
 Myelofibrosis.Rproj
